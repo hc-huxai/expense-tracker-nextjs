@@ -1,11 +1,5 @@
-import { Header } from "@/components/header";
-import { ModeToggle } from "@/components/mode-toggle";
-import { UserButton } from "@clerk/nextjs";
+import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
-  return (
-    <div className="w-screen">
-      <UserButton />
-    </div>
-  );
+  return <div className="w-screen pl-16">Hello World</div>;
 }

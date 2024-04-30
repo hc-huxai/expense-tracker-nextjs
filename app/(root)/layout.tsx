@@ -1,3 +1,4 @@
+import { Sidebar } from "@/components/sidebar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -10,5 +11,10 @@ export default function MainLayout({
 
   if (!userId) redirect("/sign-in");
 
-  return <>{children}</>;
+  return (
+    <>
+      <Sidebar />
+      {children}
+    </>
+  );
 }
