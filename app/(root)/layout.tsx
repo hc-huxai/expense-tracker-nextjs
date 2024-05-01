@@ -12,9 +12,9 @@ export default function MainLayout({
   if (!userId) redirect("/sign-in");
 
   return (
-    <>
+    <div className="flex w-screen">
       <Sidebar />
       {children}
-    </>
+    </div>
   );
 }
