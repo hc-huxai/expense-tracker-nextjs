@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { SidebarToggle } from "./sidebar/sidebar-toggle";
 import { DatePicker } from "./sidebar/datepicker";
+import { NavList } from "./sidebar/nav-list";
 
 export const Sidebar = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
   useEffect(() => {
     setIsMounted(true);
@@ -19,13 +20,14 @@ export const Sidebar = () => {
       className="border-r h-screen flex flex-col flex-shrink-0 items-center pb-4 px-2 bg-white"
       initial={{ width: "64px" }}
       animate={{
-        width: isExpanded ? "200px" : "64px",
+        width: isExpanded ? "280px" : "64px",
         paddingTop: isExpanded ? "52px" : "56px",
       }}
       transition={{ ease: "easeInOut" }}
     >
       <SidebarToggle isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
       <DatePicker isExpanded={isExpanded} />
+      <NavList />
     </motion.aside>
   );
 };
