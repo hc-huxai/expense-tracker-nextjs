@@ -10,8 +10,10 @@ import {
   ReceiptText,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-export const NavList = () => {
+export const NavList = ({ isExpanded }: { isExpanded: boolean }) => {
   const navList: NavItemType[] = [
     { label: "Home", icon: <Home />, onClick: () => {} },
     { label: "Transactions", icon: <Banknote />, onClick: () => {} },
@@ -28,11 +30,43 @@ export const NavList = () => {
       {navList.map((item: NavItemType) => (
         <Button
           key={item.label}
-          className="w-full flex items-center justify-start gap-4 h-12 rounded-3xl px-6 "
+          className="w-full flex items-center justify-start h-12 rounded-3xl relative"
           variant={"ghost"}
+          asChild
         >
-          <div className="*:w-5 *:h-5">{item.icon}</div>
-          <span>{item.label}</span>
+          <motion.button
+            initial={{
+              width: 48,
+              paddingLeft: 0,
+              paddingRight: 0,
+            }}
+            animate={{
+              width: isExpanded ? "100%" : 48,
+              paddingLeft: isExpanded ? 24 : 0,
+              paddingRight: isExpanded ? 24 : 0,
+            }}
+          >
+            <motion.div
+              initial={{ left: "calc(50% - 10px)" }}
+              animate={{ left: isExpanded ? "24px" : "calc(50% - 10px)" }}
+              className="*:w-5 *:h-5 absolute"
+            >
+              {item.icon}
+            </motion.div>
+            <motion.span
+              className={cn("origin-left")}
+              initial={{
+                marginLeft: 0,
+                scaleX: 0,
+              }}
+              animate={{
+                marginLeft: isExpanded ? 36 : 0,
+                scaleX: isExpanded ? 1 : 0,
+              }}
+            >
+              {item.label}
+            </motion.span>
+          </motion.button>
         </Button>
       ))}
     </nav>

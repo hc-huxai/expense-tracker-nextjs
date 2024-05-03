@@ -7,7 +7,7 @@ import { NavList } from "./sidebar/nav-list";
 
 export const Sidebar = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -27,7 +27,7 @@ export const Sidebar = () => {
     >
       <SidebarToggle isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
       <DatePicker isExpanded={isExpanded} />
-      <NavList />
+      <NavList isExpanded={isExpanded} />
     </motion.aside>
   );
 };
