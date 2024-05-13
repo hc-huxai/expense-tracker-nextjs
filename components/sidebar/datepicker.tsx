@@ -33,7 +33,7 @@ export const DatePicker = ({ isExpanded }: DatePickerProps) => {
         <Button
           variant={"ghost"}
           className={cn(
-            "w-full h-32 flex flex-col items-center justify-center gap-1 origin-top-left"
+            "w-full h-32 flex flex-col items-center justify-center gap-1 origin-top-left rounded-3xl"
           )}
           asChild
         >
@@ -44,7 +44,6 @@ export const DatePicker = ({ isExpanded }: DatePickerProps) => {
               width: 0,
               height: 0,
               marginBottom: 0,
-              borderRadius: 24,
             }}
             animate={{
               scale: isExpanded ? 1 : 0,
@@ -52,7 +51,6 @@ export const DatePicker = ({ isExpanded }: DatePickerProps) => {
               width: isExpanded ? "100%" : 0,
               height: isExpanded ? 128 : 0,
               marginBottom: isExpanded ? 32 : 0,
-              borderRadius: 24,
             }}
             transition={{ ease: "easeInOut" }}
           >

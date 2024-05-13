@@ -1,3 +1,5 @@
+import { FAB } from "@/components/fab";
+import { TransactionModal } from "@/components/modals/transaction-modal";
 import { Sidebar } from "@/components/sidebar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -14,7 +16,11 @@ export default function MainLayout({
   return (
     <div className="flex w-screen">
       <Sidebar />
-      {children}
+      <div className="grow">
+        <FAB />
+        <TransactionModal />
+        {children}
+      </div>
     </div>
   );
 }
