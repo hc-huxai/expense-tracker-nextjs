@@ -16,9 +16,9 @@ export default function MainLayout({
   return (
     <div className="flex w-screen">
       <Sidebar />
-      <div className="grow">
-        <FAB />
+      <div className="grow h-screen overflow-y-auto overflow-x-hidden relative">
         <TransactionModal />
+        <FAB />
         {children}
       </div>
     </div>

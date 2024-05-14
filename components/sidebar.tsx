@@ -17,7 +17,7 @@ export const Sidebar = () => {
 
   return (
     <motion.aside
-      className="border-r h-screen flex flex-col flex-shrink-0 items-center pb-4 px-2 bg-white"
+      className="border-r h-screen flex flex-col flex-shrink-0 items-center pb-4 px-2 bg-white z-50"
       initial={{ width: "64px" }}
       animate={{
         width: isExpanded ? "280px" : "64px",
