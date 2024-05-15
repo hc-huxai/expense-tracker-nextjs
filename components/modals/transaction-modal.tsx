@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { ArrowLeft } from "lucide-react";
+import { Amount } from "./transaction/amount";
 
 export const TransactionModal = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -43,6 +44,10 @@ export const TransactionModal = () => {
           <ArrowLeft />
         </Button>
         <h1 className="text-2xl font-bold text-gray-900">Add Transaction</h1>
+      </div>
+
+      <div className="w-full h-[100%-64px] grid grid-cols-2 gap-4 p-4">
+        <Amount />
       </div>
     </motion.div>
   );
