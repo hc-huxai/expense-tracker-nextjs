@@ -14,6 +14,23 @@ import { Textarea } from "@/components/ui/textarea";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import axios from "axios";
 
 const formSchema = z.object({
   category: z.string(),
@@ -37,8 +54,13 @@ export const Amount = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await axios.post("/api/transaction", values);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -61,18 +83,88 @@ export const Amount = () => {
           </TabsTrigger>
         </TabsList>
       </Tabs>
-      <div className="grid grid-cols-3 gap-4">
-        <Button variant={"outline"} className="flex items-center">
-          <SandwichIcon className="w-6 h-6 mr-2" />
-          <span>Dining</span>
-          <ChevronsUpDownIcon className="ml-auto w-4 h-4 text-muted-foreground" />
-        </Button>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid grid-cols-3 gap-4"
+        >
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Category</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="dining">Dining</SelectItem>
+                    <SelectItem value="Petrol">Petrol</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Input className="col-span-2 text-right" placeholder="$0.00" />
-        <Input className="col-span-3" placeholder="Title" />
-        <Textarea className="col-span-3" placeholder="Description" />
-        <Input type="file" className="col-span-3" placeholder="Attachment" />
-      </div>
+          <FormField
+            control={form.control}
+            name="amount"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <FormLabel>Amount</FormLabel>
+
+                <FormControl>
+                  <Input
+                    placeholder="$0.00"
+                    className="text-right"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem className="col-span-3">
+                <FormLabel>Title</FormLabel>
+
+                <FormControl>
+                  <Input placeholder="Title" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="col-span-3">
+                <FormLabel>Description</FormLabel>
+
+                <FormControl>
+                  <Textarea placeholder="Description" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/* <Input type="file" className="col-span-3" placeholder="Attachment" /> */}
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
     </div>
   );
 };
